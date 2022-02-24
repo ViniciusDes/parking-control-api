@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  database_ignite:
+    image: postgres
+    container_name: database_parking_control
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=15020918
+      - POSTGRES_DB=parkingcontrol
+    volumes:
+      - pgdata:/data/postgres
+    network_mode: host
+  app:
+    build: .
+    container_name: app_parking_control
+    ports:
+      - 3334:3334
+    volumes:
+      - .:/usr/app
+    network_mode: host
+
+volumes:
+  pgdata:
+    driver: local
