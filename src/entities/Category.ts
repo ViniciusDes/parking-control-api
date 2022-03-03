@@ -1,8 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity("categories")
 class Category {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("increment")
   ID: number;
 
   @Column()
