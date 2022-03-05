@@ -16,9 +16,9 @@ class CategoriesRepository implements ICategoriesRepository {
     value_additional,
   }: ICreateCategoryDTO): Promise<void> {
     const category = this.repository.create({
-      DESCRIPTION: description,
-      VALUE_HOUR: value_hour,
-      VALUE_ADDITIONAL: value_additional,
+      description,
+      value_hour,
+      value_additional,
     });
 
     await this.repository.save(category);

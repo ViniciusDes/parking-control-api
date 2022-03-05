@@ -9,19 +9,19 @@ import {
 @Entity("categories")
 class Category {
   @PrimaryGeneratedColumn("increment")
-  ID: number;
+  id: number;
 
   @Column()
-  DESCRIPTION: string;
+  description: string;
 
   @Column()
-  VALUE_HOUR: number;
+  value_hour: number;
 
   @Column()
-  VALUE_ADDITIONAL: number;
+  value_additional: number;
 
   @CreateDateColumn()
-  CREATED_AT: Date;
+  created_at: Date;
 }
 
 export { Category };

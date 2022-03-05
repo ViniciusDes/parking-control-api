@@ -1,5 +1,4 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
-import { query } from "express";
 
 export class CreateCategories1646270451067 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -8,16 +7,16 @@ export class CreateCategories1646270451067 implements MigrationInterface {
         name: "categories",
         columns: [
           {
-            name: "ID",
+            name: "id",
             type: "int",
             isPrimary: true,
             isGenerated: true,
             generationStrategy: "increment",
           },
-          { name: "DESCRIPTION", type: "varchar" },
-          { name: "VALUE_HOUR", type: "decimal" },
-          { name: "VALUE_ADDITIONAL", type: "decimal" },
-          { name: "CREATED_AT", type: "timestamp", default: "now()" },
+          { name: "description", type: "varchar" },
+          { name: "value_hour", type: "decimal" },
+          { name: "value_additional", type: "decimal" },
+          { name: "created_at", type: "timestamp", default: "now()" },
         ],
       })
     );
