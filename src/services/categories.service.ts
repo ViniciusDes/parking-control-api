@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateCategoryDTO } from "../dtos/ICreateCategory";
+import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
 import { ICategoriesRepository } from "../repositories/categories.repository.interface";
 import { ICategoriesService } from "./categories.service.interface";
 
@@ -10,7 +10,7 @@ class CategoriesService implements ICategoriesService {
     private categoriesRepository: ICategoriesRepository
   ) {}
 
-  async create(data: ICreateCategoryDTO): Promise<void> {
+  async create(data: CreateCategoryInterface): Promise<void> {
     await this.categoriesRepository.save(data);
   }
 }

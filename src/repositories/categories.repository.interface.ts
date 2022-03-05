@@ -1,7 +1,7 @@
-import { ICreateCategoryDTO } from "../dtos/ICreateCategory";
+import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
 
 interface ICategoriesRepository {
-  save(data: ICreateCategoryDTO): Promise<void>;
+  save(data: CreateCategoryInterface): Promise<void>;
 }
 
 export { ICategoriesRepository };

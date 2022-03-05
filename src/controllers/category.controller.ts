@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateCategoryInterface } from "../dtos/createCategory.interface";
+import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
 import { CategoriesService } from "../services/categories.service";
 
 class CategoryController {

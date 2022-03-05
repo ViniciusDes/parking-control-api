@@ -1,7 +1,7 @@
-import { ICreateCategoryDTO } from "../dtos/ICreateCategory";
+import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
 
 interface ICategoriesService {
-  create(data: ICreateCategoryDTO): Promise<void>;
+  create(data: CreateCategoryInterface): Promise<void>;
 }
 
 export { ICategoriesService };

@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateCategoryDTO } from "../../dtos/ICreateCategory";
-import { Category } from "../../entities/Category";
-import { ICategoriesRepository } from "../categories.repository.interface";
+import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
+import { Category } from "../entities/Category";
+import { ICategoriesRepository } from "./categories.repository.interface";
 
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
@@ -14,7 +14,7 @@ class CategoriesRepository implements ICategoriesRepository {
     description,
     value_hour,
     value_additional,
-  }: ICreateCategoryDTO): Promise<void> {
+  }: CreateCategoryInterface): Promise<void> {
     const category = this.repository.create({
       description,
       value_hour,
