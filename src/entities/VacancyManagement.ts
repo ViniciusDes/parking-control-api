@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  RelationId,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
 import { Category } from "./Category";
 
 @Entity("vacancy_management")
@@ -14,8 +7,8 @@ class VacancyManagement {
   id: number;
 
   @ManyToOne((type) => Category)
-  @JoinColumn({ referencedColumnName: "id" })
-  category_id: number;
+  @JoinColumn({ name: "category_id", referencedColumnName: "id" })
+  category_id: Category;
 
   @Column()
   start_time: string;

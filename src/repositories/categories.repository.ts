@@ -10,11 +10,7 @@ class CategoriesRepository implements ICategoriesRepository {
     this.repository = getRepository(Category);
   }
 
-  async save({
-    description,
-    value_hour,
-    value_additional,
-  }: CreateCategoryInterface): Promise<void> {
+  async save({ description, value_hour, value_additional }: CreateCategoryInterface): Promise<void> {
     const category = this.repository.create({
       description,
       value_hour,
