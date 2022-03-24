@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { inject, injectable } from "tsyringe";
 import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
 import { ICategoriesRepository } from "../repositories/categories.repository.interface";

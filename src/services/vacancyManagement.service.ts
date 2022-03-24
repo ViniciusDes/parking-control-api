@@ -1,7 +1,6 @@
 import { container, inject, injectable } from "tsyringe";
 import { UpdateVacancyManagementInterface } from "../interfaces/updateVacancyManagement.interface";
-import { ErrorCustom } from "../middlewares/ApiError";
-import { CategoriesRepository } from "../repositories/categories.repository";
+import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { IVacancyManagementRepository } from "../repositories/vacancyManagement.interface";
 import { CategoriesService } from "./categories.service";
 import { VacancyManagementServiceInterface } from "./vacancyManagement.service.interface";
