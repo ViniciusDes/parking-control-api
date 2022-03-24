@@ -19,6 +19,12 @@ class CategoriesRepository implements ICategoriesRepository {
 
     await this.repository.save(category);
   }
+
+  async findCategoryById(id: number): Promise<Category> {
+    const category = await this.repository.findOne(id);
+
+    return category;
+  }
 }
 
 export { CategoriesRepository };
