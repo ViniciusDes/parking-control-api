@@ -1,15 +1,6 @@
-import {
-  ManyToOne,
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableColumn,
-  TableForeignKey,
-} from "typeorm";
+import { ManyToOne, MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from "typeorm";
 
-export class CreateVacancyManagement1646450525812
-  implements MigrationInterface
-{
+export class CreateVacancyManagement1648505612689 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -55,6 +46,10 @@ export class CreateVacancyManagement1646450525812
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    const table = await queryRunner.getTable("vacancy_management");
+    const foreignKeyCategory = table.foreignKeys.find((fk) => fk.columnNames.indexOf("category_id") !== -1);
+    await queryRunner.dropForeignKey("vacancy_management", foreignKeyCategory);
+    await queryRunner.dropColumn("vacancy_management", "category_id");
     await queryRunner.dropTable("vacancy_management");
   }
 }

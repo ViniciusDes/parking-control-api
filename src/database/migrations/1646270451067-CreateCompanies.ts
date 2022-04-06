@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateCompanies1648505612689 implements MigrationInterface {
+export class CreateCompanies1646270451067 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -13,6 +13,7 @@ export class CreateCompanies1648505612689 implements MigrationInterface {
             isGenerated: true,
             generationStrategy: "increment",
           },
+          { name: "cod_company", type: "varchar(4)" },
           { name: "cpf_cpnj", type: "varchar(50)" },
           { name: "description", type: "varchar(250)" },
           { name: "address_zip_code", type: "varchar(8)" },

@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from "typeorm";
 
-export class UsersPermissions1648684747997 implements MigrationInterface {
+export class CreateGroupPermission1649202424971 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "users_permissions",
+        name: "group_permission",
         columns: [
           {
             name: "id",
@@ -18,15 +18,7 @@ export class UsersPermissions1648684747997 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      "users_permissions",
-      new TableColumn({
-        name: "id_user",
-        type: "int",
-      })
-    );
-
-    await queryRunner.addColumn(
-      "users_permissions",
+      "group_permission",
       new TableColumn({
         name: "id_permission",
         type: "int",
@@ -34,17 +26,7 @@ export class UsersPermissions1648684747997 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      "users_permissions",
-      new TableForeignKey({
-        columnNames: ["id_user"],
-        referencedColumnNames: ["id"],
-        referencedTableName: "users",
-        onDelete: "CASCADE",
-      })
-    );
-
-    await queryRunner.createForeignKey(
-      "users_permissions",
+      "group_permission",
       new TableForeignKey({
         columnNames: ["id_permission"],
         referencedColumnNames: ["id"],
@@ -52,16 +34,34 @@ export class UsersPermissions1648684747997 implements MigrationInterface {
         onDelete: "CASCADE",
       })
     );
+
+    await queryRunner.addColumn(
+      "group_permission",
+      new TableColumn({
+        name: "id_group",
+        type: "int",
+      })
+    );
+
+    await queryRunner.createForeignKey(
+      "group_permission",
+      new TableForeignKey({
+        columnNames: ["id_group"],
+        referencedColumnNames: ["id"],
+        referencedTableName: "groups",
+        onDelete: "CASCADE",
+      })
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable("users_permissions");
-    const foreignKeyUser = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_user") !== -1);
+    const table = await queryRunner.getTable("group_permission");
     const foreignKeyPermission = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_permission") !== -1);
-    await queryRunner.dropForeignKey("users_permissions", foreignKeyUser);
-    await queryRunner.dropForeignKey("users_permissions", foreignKeyPermission);
-    await queryRunner.dropColumn("users_permissions", "id_user");
-    await queryRunner.dropColumn("users_permissions", "id_permission");
-    await queryRunner.dropTable("users_permissions");
+    const foreignKeyGroup = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_group") !== -1);
+    await queryRunner.dropForeignKey("group_permission", foreignKeyPermission);
+    await queryRunner.dropForeignKey("group_permission", foreignKeyGroup);
+    await queryRunner.dropColumn("group_permission", "id_group");
+    await queryRunner.dropColumn("group_permission", "id_permission");
+    await queryRunner.dropTable("group_permission");
   }
 }

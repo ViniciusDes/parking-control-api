@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from "typeorm";
 
-export class CreateUsers1648510841967 implements MigrationInterface {
+export class CreateCategories1646450525812 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "users",
+        name: "categories",
         columns: [
           {
             name: "id",
@@ -13,15 +13,16 @@ export class CreateUsers1648510841967 implements MigrationInterface {
             isGenerated: true,
             generationStrategy: "increment",
           },
-          { name: "name", type: "varchar(250)" },
-          { name: "situation", type: "int", isNullable: false, default: 1 },
-          { name: "created_at", type: "timestamp", isNullable: false, default: "now()" },
+          { name: "description", type: "varchar" },
+          { name: "value_hour", type: "decimal" },
+          { name: "value_additional", type: "decimal" },
+          { name: "created_at", type: "timestamp", default: "now()" },
         ],
       })
     );
 
     await queryRunner.addColumn(
-      "users",
+      "categories",
       new TableColumn({
         name: "id_company",
         type: "int",
@@ -29,7 +30,7 @@ export class CreateUsers1648510841967 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      "users",
+      "categories",
       new TableForeignKey({
         columnNames: ["id_company"],
         referencedColumnNames: ["id"],
@@ -40,10 +41,10 @@ export class CreateUsers1648510841967 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable("users");
+    const table = await queryRunner.getTable("categories");
     const foreignKeyCompany = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_company") !== -1);
-    await queryRunner.dropForeignKey("users", foreignKeyCompany);
-    await queryRunner.dropColumn("users", "id_company");
-    await queryRunner.dropTable("users");
+    await queryRunner.dropForeignKey("categories", foreignKeyCompany);
+    await queryRunner.dropColumn("categories", "id_company");
+    await queryRunner.dropTable("categories");
   }
 }
