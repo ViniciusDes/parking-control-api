@@ -1,7 +1,7 @@
-interface CreateCategoryInterface {
+interface CategoryDTO {
   description: string;
   value_hour: number;
   value_additional: number;
 }
 
-export { CreateCategoryInterface };
+export { CategoryDTO };

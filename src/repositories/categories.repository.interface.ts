@@ -1,10 +1,10 @@
 import { Category } from "../entities/Category";
-import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
+import { CategoryDTO } from "../interfaces/categoryDTO.interface";
 
-interface ICategoriesRepository {
-  save(data: CreateCategoryInterface): Promise<void>;
+interface CategoriesRepositoryInterface {
+  save(data: CategoryDTO): Promise<void>;
 
   findCategoryById(id: number): Promise<Category>;
 }
 
-export { ICategoriesRepository };
+export { CategoriesRepositoryInterface };

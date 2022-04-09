@@ -1,5 +1,5 @@
 import { container, inject, injectable } from "tsyringe";
-import { UpdateVacancyManagementInterface } from "../interfaces/updateVacancyManagement.interface";
+import { VacancyManagementDTO } from "../interfaces/vacancyManagementDTO.interface";
 import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { IVacancyManagementRepository } from "../repositories/vacancyManagement.interface";
 import { CategoriesService } from "./categories.service";
@@ -12,7 +12,7 @@ class VacancyManagementService implements VacancyManagementServiceInterface {
     private vacancyManagementRepository: IVacancyManagementRepository
   ) {}
 
-  async updateVacancy(data: UpdateVacancyManagementInterface): Promise<void> {
+  async updateVacancy(data: VacancyManagementDTO): Promise<void> {
     const categoriesService = container.resolve(CategoriesService);
 
     try {

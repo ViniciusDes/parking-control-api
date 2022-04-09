@@ -1,15 +1,11 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
+import { CategoryDTO } from "../interfaces/categoryDTO.interface";
 import { CategoriesService } from "../services/categories.service";
 
 class CategoryController {
   async createCategory(req: Request, res: Response) {
-    const {
-      description,
-      value_hour,
-      value_additional,
-    }: CreateCategoryInterface = req.body;
+    const { description, value_hour, value_additional }: CategoryDTO = req.body;
 
     const categoriesService = container.resolve(CategoriesService);
 

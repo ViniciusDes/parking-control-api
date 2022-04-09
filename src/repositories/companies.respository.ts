@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 import { Company } from "../entities/Company";
-import { CreateCompany } from "../interfaces/createCompany.interface";
+import { CompanyDTO } from "../interfaces/companyDTO.interface";
 import { CompaniesRepositoryInterface } from "./companies.repository.interface";
 
 class CompaniesRepository implements CompaniesRepositoryInterface {
@@ -10,7 +10,7 @@ class CompaniesRepository implements CompaniesRepositoryInterface {
     this.repository = getRepository(Company);
   }
 
-  async save(data: CreateCompany) {
+  async save(data: CompanyDTO) {
     const company = this.repository.create(data);
 
     await this.repository.save(company);

@@ -12,7 +12,10 @@ class Company {
   cpf_cpnj: string;
 
   @Column()
-  description: string;
+  corporate_name: string;
+
+  @Column()
+  fantasy_name: string;
 
   @Column()
   address_zip_code: string;

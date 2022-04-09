@@ -1,13 +1,13 @@
 import { inject, injectable } from "tsyringe";
-import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
-import { ICategoriesRepository } from "../repositories/categories.repository.interface";
+import { CategoryDTO } from "../interfaces/categoryDTO.interface";
+import { CategoriesRepositoryInterface } from "../repositories/categories.repository.interface";
 import { ICategoriesService } from "./categories.service.interface";
 
 @injectable()
 class CategoriesService implements ICategoriesService {
   constructor(
     @inject("CategoriesRepository")
-    private categoriesRepository: ICategoriesRepository
+    private categoriesRepository: CategoriesRepositoryInterface
   ) {}
 
   findCategoryById = (category_id: number) => {
@@ -24,7 +24,7 @@ class CategoriesService implements ICategoriesService {
     return category;
   };
 
-  async create(data: CreateCategoryInterface): Promise<void> {
+  async create(data: CategoryDTO): Promise<void> {
     await this.categoriesRepository.save(data);
   }
 }

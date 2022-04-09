@@ -1,16 +1,16 @@
 import { getRepository, Repository } from "typeorm";
-import { CreateCategoryInterface } from "../interfaces/createCategory.interface";
+import { CategoryDTO } from "../interfaces/categoryDTO.interface";
 import { Category } from "../entities/Category";
-import { ICategoriesRepository } from "./categories.repository.interface";
+import { CategoriesRepositoryInterface } from "./categories.repository.interface";
 
-class CategoriesRepository implements ICategoriesRepository {
+class CategoriesRepository implements CategoriesRepositoryInterface {
   private repository: Repository<Category>;
 
   constructor() {
     this.repository = getRepository(Category);
   }
 
-  async save({ description, value_hour, value_additional }: CreateCategoryInterface): Promise<void> {
+  async save({ description, value_hour, value_additional }: CategoryDTO): Promise<void> {
     const category = this.repository.create({
       description,
       value_hour,

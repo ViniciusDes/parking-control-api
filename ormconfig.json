@@ -6,10 +6,12 @@
   "password":"15020918",
   "database":"parkingcontrol",
   "migrations": ["./src/database/migrations/*.ts"],
+  "$schema": "public",
   "entities": [
     "./src/**/entities/*.ts"
   ],
   "cli": {
+    "entitiesDir": "src/entities",
     "migrationsDir": "./src/database/migrations"
-  }
+ }
 }

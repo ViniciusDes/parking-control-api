@@ -1,7 +1,7 @@
-import { UpdateVacancyManagementInterface } from "../interfaces/updateVacancyManagement.interface";
+import { VacancyManagementDTO } from "../interfaces/vacancyManagementDTO.interface";
 
 interface VacancyManagementServiceInterface {
-  updateVacancy: (data: UpdateVacancyManagementInterface) => Promise<void>;
+  updateVacancy: (data: VacancyManagementDTO) => Promise<void>;
 }
 
 export { VacancyManagementServiceInterface };

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateCompany } from "../interfaces/createCompany.interface";
+import { CompanyDTO } from "../interfaces/companyDTO.interface";
 import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { CompaniesService } from "../services/companies.service";
 
 class CompaniesController {
   async createCompany(req: Request, res: Response) {
-    const data: CreateCompany = req.body;
+    const data: CompanyDTO = req.body;
 
     const companyService = container.resolve(CompaniesService);
 

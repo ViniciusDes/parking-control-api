@@ -1,8 +1,9 @@
-interface CreateCompany {
+interface CompanyDTO {
   id?: number;
   cod_company: string;
   cpf_cpnj: string;
-  description: string;
+  corporate_name: string;
+  fantasy_name: string;
   address_zip_code: string;
   address_state: string;
   address_city: string;
@@ -12,4 +13,4 @@ interface CreateCompany {
   created_at?: string;
 }
 
-export { CreateCompany };
+export { CompanyDTO };

@@ -1,4 +1,4 @@
-interface UpdateVacancyManagementInterface {
+interface VacancyManagementDTO {
   id?: number;
   category_id: number;
   start_time: number;
@@ -12,4 +12,4 @@ interface UpdateVacancyManagementInterface {
   vacancy_number: number;
 }
 
-export { UpdateVacancyManagementInterface };
+export { VacancyManagementDTO };

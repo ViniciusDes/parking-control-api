@@ -1,7 +1,7 @@
-import { CreateCompany } from "../interfaces/createCompany.interface";
+import { CompanyDTO } from "../interfaces/companyDTO.interface";
 
 interface CompaniesServiceInterface {
-  saveCompany: (data: CreateCompany) => Promise<void>;
+  saveCompany: (data: CompanyDTO) => Promise<void>;
 }
 
 export { CompaniesServiceInterface };
