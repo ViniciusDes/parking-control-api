@@ -15,6 +15,18 @@ class UsersRepository implements UsersRepositoryInterface {
 
     await this.repository.save(user);
   }
+
+  async findUserByCpfOrEmail(user_: UserDTO) {
+    const user = await this.repository
+      .createQueryBuilder()
+      .where("email = :email OR cpf = :cpf and cpf != null", {
+        email: user_.email,
+        cpf: user_.cpf,
+      })
+      .getOne();
+
+    return user;
+  }
 }
 
 export { UsersRepository };

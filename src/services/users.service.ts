@@ -11,8 +11,25 @@ class UsersService implements UserServicesInterface {
     private userRepository: UsersRepositoryInterface
   ) {}
 
+  async verifyUserHasAlreadyExists(user: UserDTO) {
+    const userExists = await this.userRepository.findUserByCpfOrEmail(user);
+    console.log("userExists", userExists);
+    return userExists;
+  }
+
+  async findUserByCpf() {}
+
   async saveUser(data: UserDTO) {
     try {
+      const userAlredyExists = await this.verifyUserHasAlreadyExists(data);
+      if (userAlredyExists) {
+        throw new ErrorCustom({
+          statusCode: 501,
+          message: "Usuário já existe, verifique",
+        });
+        return;
+      }
+
       await this.userRepository.save(data);
     } catch (e) {
       throw new ErrorCustom({

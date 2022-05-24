@@ -14,6 +14,12 @@ class User {
   @Column()
   situation: string;
 
+  @Column()
+  cpf: string;
+
+  @Column()
+  email: string;
+
   @CreateDateColumn()
   created_at: Date;
 }
