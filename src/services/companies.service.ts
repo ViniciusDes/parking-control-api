@@ -51,7 +51,7 @@ class CompaniesService implements CompaniesServiceInterface {
 
       if (!dataIsValid) {
         throw new ErrorCustom({
-          statusCode: 500,
+          statusCode: 501,
           message: JSON.stringify(this.errors),
         });
       }

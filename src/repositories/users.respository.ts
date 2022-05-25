@@ -19,7 +19,7 @@ class UsersRepository implements UsersRepositoryInterface {
   async findUserByCpfOrEmail(user_: UserDTO) {
     const user = await this.repository
       .createQueryBuilder()
-      .where("email = :email OR cpf = :cpf and cpf != null", {
+      .where(`email = :email OR cpf = :cpf and cpf !=  ${null} and email != ${null}`, {
         email: user_.email,
         cpf: user_.cpf,
       })
