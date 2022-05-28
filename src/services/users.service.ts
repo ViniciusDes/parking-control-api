@@ -20,7 +20,7 @@ class UsersService implements UserServicesInterface {
     return userExists;
   }
 
-  private async validateData(data: UserDTO) {
+  private async validateData(data: UserDTO): Promise<boolean> {
     const userAlredyExists = await this.verifyUserHasAlreadyExists(data);
     if (userAlredyExists) {
       throw new ErrorCustom({
@@ -58,7 +58,7 @@ class UsersService implements UserServicesInterface {
   async saveUser(data: UserDTO) {
     try {
       const dataIsValid = await this.validateData(data);
-      console.log(dataIsValid);
+
       if (!dataIsValid) {
         throw new ErrorCustom({
           statusCode: 501,

@@ -18,7 +18,7 @@ services:
     build: .
     container_name: app_parking_control
     ports:
-      - 3334:3334
+      - 3335:3336
     volumes:
       - .:/usr/app
     network_mode: host
