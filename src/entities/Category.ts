@@ -1,10 +1,5 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Company } from "./Company";
 
 @Entity("categories")
 class Category {
@@ -19,6 +14,10 @@ class Category {
 
   @Column()
   value_additional: number;
+
+  @ManyToOne(() => Company, (company) => company.id)
+  id_company: number;
+  company: Company;
 
   @CreateDateColumn()
   created_at: Date;

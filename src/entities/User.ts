@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Company } from "./Company";
 
 @Entity("users")
 class User {
@@ -9,7 +10,10 @@ class User {
   name: string;
 
   @Column()
+  @ManyToMany(() => Company, (company) => company.id)
+  @JoinColumn()
   id_company: number;
+  company: Company;
 
   @Column()
   situation: string;
