@@ -5,15 +5,7 @@ export class UsersPermissions1648684747997 implements MigrationInterface {
     await queryRunner.createTable(
       new Table({
         name: "users_permissions",
-        columns: [
-          {
-            name: "id",
-            type: "int",
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: "increment",
-          },
-        ],
+        columns: [],
       })
     );
 

@@ -14,36 +14,18 @@ export class CreateUsers1648510841967 implements MigrationInterface {
             generationStrategy: "increment",
           },
           { name: "name", type: "varchar(250)" },
+          { name: "cpf", type: "varchar(11)" },
+          { name: "email", type: "varchar(100)" },
+          { name: "password", type: "varchar(100)" },
           { name: "situation", type: "int", isNullable: false, default: 1 },
           { name: "created_at", type: "timestamp", isNullable: false, default: "now()" },
         ],
       })
     );
-
-    await queryRunner.addColumn(
-      "users",
-      new TableColumn({
-        name: "id_company",
-        type: "int",
-      })
-    );
-
-    await queryRunner.createForeignKey(
-      "users",
-      new TableForeignKey({
-        columnNames: ["id_company"],
-        referencedColumnNames: ["id"],
-        referencedTableName: "companies",
-        onDelete: "CASCADE",
-      })
-    );
+ 
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable("users");
-    const foreignKeyCompany = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_company") !== -1);
-    await queryRunner.dropForeignKey("users", foreignKeyCompany);
-    await queryRunner.dropColumn("users", "id_company");
     await queryRunner.dropTable("users");
   }
 }

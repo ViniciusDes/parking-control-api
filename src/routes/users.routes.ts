@@ -6,4 +6,6 @@ const userController = new UsersController();
 
 usersRoutes.post("/", userController.createUser);
 
+usersRoutes.post("/bindCompany", userController.bindUserWithCompany);
+
 export { usersRoutes };

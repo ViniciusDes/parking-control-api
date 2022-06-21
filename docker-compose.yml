@@ -1,10 +1,16 @@
 version: "3.7"
 
+networks:
+  backend-network:
+    external: true
+
 services:
   database_ignite:
     image: postgres
     container_name: database_parking_control
     restart: always
+    networks:
+      - backend-network
     ports:
       - 5434:5432
     environment:
@@ -13,15 +19,17 @@ services:
       - POSTGRES_DB=parkingcontrol
     volumes:
       - pgdata:/data/postgres
-    network_mode: host
+    # network_mode: host
   app:
     build: .
+    networks:
+      - backend-network
     container_name: app_parking_control
     ports:
       - 3335:3336
     volumes:
       - .:/usr/app
-    network_mode: host
+    # network_mode: host
 
 volumes:
   pgdata:

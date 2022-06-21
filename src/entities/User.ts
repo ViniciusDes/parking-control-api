@@ -10,12 +10,6 @@ class User {
   name: string;
 
   @Column()
-  @ManyToMany(() => Company, (company) => company.id)
-  @JoinColumn()
-  id_company: number;
-  company: Company;
-
-  @Column()
   situation: string;
 
   @Column()

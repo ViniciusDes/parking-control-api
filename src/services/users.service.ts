@@ -1,15 +1,19 @@
 import { inject, injectable } from "tsyringe";
 import * as Yup from "yup";
+import { BindUserWithCompanyDTO } from "../interfaces/bindUserWithCompanyDTO.interface";
 import { UserDTO } from "../interfaces/userDTO.interface";
 import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { UsersRepositoryInterface } from "../repositories/users.respository.interface";
+import { UsersCompaniesRepositoryInterface } from "../repositories/usersCompanies.repository.interface";
 import { UserServicesInterface } from "./users.service.interface";
 
 @injectable()
 class UsersService implements UserServicesInterface {
   constructor(
     @inject("UsersRepository")
-    private userRepository: UsersRepositoryInterface
+    private userRepository: UsersRepositoryInterface,
+    @inject("UsersCompaniesReporitory")
+    private usersCompanies: UsersCompaniesRepositoryInterface
   ) {}
 
   private errors = {};
@@ -50,7 +54,6 @@ class UsersService implements UserServicesInterface {
 
   private schemaValidate = Yup.object().shape({
     name: Yup.string().required("Campo obrigatório").max(250, "Máximo 250 caracteres, verifique"),
-    id_company: Yup.number().required("Campo obrigatório"),
     cpf: Yup.string().max(11, "Máximo 11 caracteres, verifique"),
     email: Yup.string().required("O campo é obrigatório"),
   });
@@ -66,6 +69,17 @@ class UsersService implements UserServicesInterface {
         });
       }
       await this.userRepository.save(data);
+    } catch (e) {
+      throw new ErrorCustom({
+        statusCode: 500,
+        message: e.message,
+      });
+    }
+  }
+
+  async bindUserWithCompany(data: BindUserWithCompanyDTO) {
+    try {
+      await this.usersCompanies.bindUserWithCompany(data);
     } catch (e) {
       throw new ErrorCustom({
         statusCode: 500,

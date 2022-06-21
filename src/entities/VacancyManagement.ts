@@ -6,8 +6,7 @@ class VacancyManagement {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne((type) => Category)
-  @JoinColumn({ name: "category_id", referencedColumnName: "id" })
+  @ManyToOne(() => Category, (category) => category.id)
   category_id: Category;
 
   @Column()

@@ -4,21 +4,13 @@ export class CreateGroupPermission1649202424971 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "group_permission",
-        columns: [
-          {
-            name: "id",
-            type: "int",
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: "increment",
-          },
-        ],
+        name: "groups_permissions",
+        columns: [],
       })
     );
 
     await queryRunner.addColumn(
-      "group_permission",
+      "groups_permissions",
       new TableColumn({
         name: "id_permission",
         type: "int",
@@ -26,7 +18,7 @@ export class CreateGroupPermission1649202424971 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      "group_permission",
+      "groups_permissions",
       new TableForeignKey({
         columnNames: ["id_permission"],
         referencedColumnNames: ["id"],
@@ -36,7 +28,7 @@ export class CreateGroupPermission1649202424971 implements MigrationInterface {
     );
 
     await queryRunner.addColumn(
-      "group_permission",
+      "groups_permissions",
       new TableColumn({
         name: "id_group",
         type: "int",
@@ -44,7 +36,7 @@ export class CreateGroupPermission1649202424971 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      "group_permission",
+      "groups_permissions",
       new TableForeignKey({
         columnNames: ["id_group"],
         referencedColumnNames: ["id"],
@@ -55,13 +47,13 @@ export class CreateGroupPermission1649202424971 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable("group_permission");
+    const table = await queryRunner.getTable("groups_permissions");
     const foreignKeyPermission = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_permission") !== -1);
     const foreignKeyGroup = table.foreignKeys.find((fk) => fk.columnNames.indexOf("id_group") !== -1);
-    await queryRunner.dropForeignKey("group_permission", foreignKeyPermission);
-    await queryRunner.dropForeignKey("group_permission", foreignKeyGroup);
-    await queryRunner.dropColumn("group_permission", "id_group");
-    await queryRunner.dropColumn("group_permission", "id_permission");
-    await queryRunner.dropTable("group_permission");
+    await queryRunner.dropForeignKey("groups_permissions", foreignKeyPermission);
+    await queryRunner.dropForeignKey("groups_permissions", foreignKeyGroup);
+    await queryRunner.dropColumn("groups_permissions", "id_group");
+    await queryRunner.dropColumn("groups_permissions", "id_permission");
+    await queryRunner.dropTable("groups_permissions");
   }
 }
