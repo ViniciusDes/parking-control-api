@@ -5,7 +5,7 @@ import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { CompaniesService } from "../services/companies.service";
 
 class CompaniesController {
-  async createCompany(req: Request, res: Response) {
+  async createCompany(req: Request, res: Response): Promise<Response> {
     const data: CompanyDTO = req.body;
 
     const companyService = container.resolve(CompaniesService);

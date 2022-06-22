@@ -16,14 +16,15 @@ class UsersRepository implements UsersRepositoryInterface {
     await this.repository.save(user);
   }
 
-  async findUserByCpfOrEmail(user_: UserDTO) {
-    const user = await this.repository
-      .createQueryBuilder()
-      .where(`email = :email OR cpf = :cpf and cpf !=  ${null} and email != ${null}`, {
-        email: user_.email,
-        cpf: user_.cpf,
-      })
-      .getOne();
+  async findUserByEmail(email: string): Promise<User> {
+    const user = await this.repository.findOne({
+      email: email,
+    });
+
+    return user;
+  }
+  async findUserById(id: number): Promise<User> {
+    const user = await this.repository.findOne(id);
 
     return user;
   }

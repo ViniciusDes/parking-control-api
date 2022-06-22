@@ -5,7 +5,7 @@ import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { PermissionsService } from "../services/permissions.service";
 
 class PermissionsController {
-  async createPermission(req: Request, res: Response) {
+  async createPermission(req: Request, res: Response): Promise<Response> {
     const data: PermissionsDTO = req.body;
 
     try {

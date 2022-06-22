@@ -4,7 +4,7 @@ import { VacancyManagementDTO } from "../interfaces/vacancyManagementDTO.interfa
 import { VacancyManagementService } from "../services/vacancyManagement.service";
 
 class VacancyManagementController {
-  async updateVacancy(req: Request, res: Response) {
+  async updateVacancy(req: Request, res: Response): Promise<Response> {
     const dataToUpdateVacancyManagement: VacancyManagementDTO = req.body;
 
     const vacancyManagementService = container.resolve(VacancyManagementService);

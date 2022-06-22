@@ -4,7 +4,7 @@ import { CategoryDTO } from "../interfaces/categoryDTO.interface";
 import { CategoriesService } from "../services/categories.service";
 
 class CategoryController {
-  async createCategory(req: Request, res: Response) {
+  async createCategory(req: Request, res: Response): Promise<Response> {
     const { description, value_hour, value_additional }: CategoryDTO = req.body;
 
     const categoriesService = container.resolve(CategoriesService);

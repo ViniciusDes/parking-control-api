@@ -3,7 +3,8 @@ import { UserDTO } from "../interfaces/userDTO.interface";
 
 interface UsersRepositoryInterface {
   save: (data: UserDTO) => Promise<void>;
-  findUserByCpfOrEmail: (data: UserDTO) => Promise<User>;
+  findUserByEmail: (email: string) => Promise<User>;
+  findUserById: (id: number) => Promise<User>;
 }
 
 export { UsersRepositoryInterface };
