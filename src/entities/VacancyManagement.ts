@@ -7,6 +7,10 @@ class VacancyManagement {
   id: number;
 
   @ManyToOne(() => Category, (category) => category.id)
+  @JoinColumn({
+    name: "category_id",
+    referencedColumnName: "id",
+  })
   category_id: Category;
 
   @Column()

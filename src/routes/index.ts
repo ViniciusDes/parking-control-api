@@ -9,7 +9,7 @@ const routes = Router();
 
 routes.use("/categories", categoriesRoutes);
 
-routes.use("/vacancyManagement", vacancyManagementRoutes);
+routes.use(vacancyManagementRoutes);
 
 routes.use("/companies", companiesRoutes);
 

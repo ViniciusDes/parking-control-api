@@ -12,7 +12,7 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
 
   if (!authHeader) {
     throw new ErrorCustom({
-      statusCode: 402,
+      statusCode: 403,
       message: "Unauthorized",
     });
   }
@@ -27,14 +27,14 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
 
     if (!user) {
       throw new ErrorCustom({
-        statusCode: 402,
+        statusCode: 403,
         message: "Usuário não existe!",
       });
     }
     next();
   } catch (error) {
     throw new ErrorCustom({
-      statusCode: 402,
+      statusCode: 403,
       message: "Unauthorized",
     });
   }

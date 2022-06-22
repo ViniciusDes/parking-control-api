@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Company } from "./Company";
 
 @Entity("categories")
@@ -16,8 +16,11 @@ class Category {
   value_additional: number;
 
   @ManyToOne(() => Company, (company) => company.id)
+  @JoinColumn({
+    name: "id_company",
+    referencedColumnName: "id",
+  })
   id_company: number;
-  company: Company;
 
   @CreateDateColumn()
   created_at: Date;

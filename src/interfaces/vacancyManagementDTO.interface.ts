@@ -12,4 +12,13 @@ interface VacancyManagementDTO {
   vacancy_number: number;
 }
 
-export { VacancyManagementDTO };
+interface CheckInDTO {
+  category_id: number;
+  start_time: number;
+  value_hour?: number;
+  board?: number;
+  description?: number;
+  vacancy_number: number;
+}
+
+export { VacancyManagementDTO, CheckInDTO };

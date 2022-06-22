@@ -5,6 +5,6 @@ const vacancyManagementRoutes = Router();
 
 const vacancyManagementController = new VacancyManagementController();
 
-vacancyManagementRoutes.post("/", vacancyManagementController.updateVacancy);
+vacancyManagementRoutes.post("/checkIn", vacancyManagementController.checkIn);
 
 export { vacancyManagementRoutes };

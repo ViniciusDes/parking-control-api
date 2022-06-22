@@ -1,11 +1,10 @@
 import { Router } from "express";
 import { UsersController } from "../controllers/users.contoller";
-import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 const usersRoutes = Router();
 const userController = new UsersController();
 
-usersRoutes.post("/", ensureAuthenticated, userController.createUser);
+usersRoutes.post("/", userController.createUser);
 
 usersRoutes.post("/bindCompany", userController.bindUserWithCompany);
 

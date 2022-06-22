@@ -10,11 +10,12 @@ class CategoriesRepository implements CategoriesRepositoryInterface {
     this.repository = getRepository(Category);
   }
 
-  async save({ description, value_hour, value_additional }: CategoryDTO): Promise<void> {
+  async save({ description, value_hour, value_additional, id_company }: CategoryDTO): Promise<void> {
     const category = this.repository.create({
       description,
       value_hour,
       value_additional,
+      id_company,
     });
 
     await this.repository.save(category);
