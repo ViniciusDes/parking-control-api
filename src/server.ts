@@ -3,14 +3,21 @@ import "express-async-errors";
 import "./database";
 import "./shared/container";
 import { routes } from "./routes";
-import { errorMidleware } from "./middlewares/errors";
+const errorMidleware = require("./middlewares/errors");
+const bodyParser = require("body-parser");
 const errorsExceptions = require("./middlewares/errorsExceptions");
+const methodOverride = require("method-override");
+
 const app = express();
+
+app.use(bodyParser());
+app.use(methodOverride());
 
 app.use(express.json());
 
 app.use(routes);
 
-app.listen(3334, () => console.log("server is running"));
+// app.use(errorsExceptions);
+app.use(errorMidleware);
 
-app.use(errorsExceptions);
+app.listen(3334, () => console.log("server is running"));

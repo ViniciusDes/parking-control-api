@@ -18,24 +18,17 @@ class VacancyManagementController {
     });
   }
 
-  async checkIn(req: Request, res: Response): Promise<Response> {
+  async checkIn(req: Request, res: Response) {
     const dataToUpdateVacancyManagement: CheckInDTO = req.body;
 
     const vacancyManagementService = container.resolve(VacancyManagementService);
 
-    try {
-      await vacancyManagementService.checkIn(dataToUpdateVacancyManagement);
+    await vacancyManagementService.checkIn(dataToUpdateVacancyManagement);
 
-      return res.status(201).send({
-        success: true,
-        message: "Vaga atualizada com sucesso",
-      });
-    } catch (error) {
-      console.log(error);
-      console.log("errrrrorrrr", Object.keys(error));
-      // return error;
-      // throw new ErrorCustom({ statusCode: 402, message: "teste" });
-    }
+    return res.status(201).send({
+      success: true,
+      message: "Vaga atualizada com sucesso",
+    });
   }
 }
 

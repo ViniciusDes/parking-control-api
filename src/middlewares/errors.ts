@@ -4,11 +4,16 @@ interface ErrorMiddlewareInterface extends Error {
   statusCode: number;
 }
 
-const errorMidleware = (err: ErrorMiddlewareInterface, request: Request, response: Response, next: NextFunction) => {
-  return response.status(err.statusCode).json({
-    sucess: false,
-    message: err.message,
-  });
+module.exports = (err: ErrorMiddlewareInterface, req: Request, res: Response, next: NextFunction) => {
+  console.log("asdas", err.message, err.name);
+  if (["DependecyNotFound"].includes(err.name)) {
+    res.status(400).send({
+      success: false,
+      error: err.message,
+    });
+  } else {
+    res.status(500).send({
+      error: err.message,
+    });
+  }
 };
-
-export { errorMidleware };
