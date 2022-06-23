@@ -59,6 +59,12 @@ class VacancyManagementRepository implements IVacancyManagementRepository {
 
     return vacancy;
   }
+
+  async findVacancyById(id: number): Promise<VacancyManagement> {
+    const vacancy = await this.repository.findOne(id);
+
+    return vacancy;
+  }
 }
 
 export { VacancyManagementRepository };

@@ -21,4 +21,20 @@ interface CheckInDTO {
   vacancy_number: number;
 }
 
-export { VacancyManagementDTO, CheckInDTO };
+interface CheckOutDTO {
+  id: number;
+}
+
+interface CalculatorTimeSpentInterface {
+  valueTotal: number;
+  valueAdditional: number | null;
+  timeSpent: string;
+}
+
+interface CalculationTimeSpentDTO {
+  startTime: string;
+  valueHourCategory: number;
+  valueAdditionalCategory: number;
+}
+
+export { VacancyManagementDTO, CheckInDTO, CheckOutDTO, CalculatorTimeSpentInterface, CalculationTimeSpentDTO };

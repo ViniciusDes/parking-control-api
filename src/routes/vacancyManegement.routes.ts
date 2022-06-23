@@ -7,4 +7,6 @@ const vacancyManagementController = new VacancyManagementController();
 
 vacancyManagementRoutes.post("/checkIn", vacancyManagementController.checkIn);
 
+vacancyManagementRoutes.post("/checkOut", vacancyManagementController.checkOut);
+
 export { vacancyManagementRoutes };

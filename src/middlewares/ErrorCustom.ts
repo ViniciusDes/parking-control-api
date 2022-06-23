@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 
 interface CustomError {
-  statusCode: number;
+  statusCode?: number;
   message?: string;
   name?: string;
 }

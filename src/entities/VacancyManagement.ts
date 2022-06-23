@@ -11,7 +11,7 @@ class VacancyManagement {
     name: "category_id",
     referencedColumnName: "id",
   })
-  category_id: Category;
+  category_id: number;
 
   @Column()
   start_time: string;

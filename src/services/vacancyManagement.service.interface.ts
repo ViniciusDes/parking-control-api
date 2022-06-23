@@ -1,8 +1,15 @@
-import { CheckInDTO, VacancyManagementDTO } from "../interfaces/vacancyManagementDTO.interface";
+import {
+  CalculationTimeSpentDTO,
+  CalculatorTimeSpentInterface,
+  CheckInDTO,
+  CheckOutDTO,
+  VacancyManagementDTO,
+} from "../interfaces/vacancyManagementDTO.interface";
 
 interface VacancyManagementServiceInterface {
-  updateVacancy: (data: VacancyManagementDTO) => Promise<void>;
   checkIn: (data: CheckInDTO) => Promise<void>;
+  checkOut: (data: CheckOutDTO) => Promise<void>;
+  calculateTimeSpent: (data: CalculationTimeSpentDTO) => CalculatorTimeSpentInterface;
 }
 
 export { VacancyManagementServiceInterface };
