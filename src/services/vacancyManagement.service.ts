@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { container, inject, injectable } from "tsyringe";
 import {
   CalculationTimeSpentDTO,
@@ -8,7 +9,7 @@ import {
 } from "../interfaces/vacancyManagementDTO.interface";
 import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { IVacancyManagementRepository } from "../repositories/vacancyManagement.interface";
-import { substractDate } from "../utils/DatesManipulation";
+import { formatDateAndHour, substractDate } from "../utils/DatesManipulation";
 import { CategoriesService } from "./categories.service";
 import { VacancyManagementServiceInterface } from "./vacancyManagement.service.interface";
 
@@ -62,6 +63,12 @@ class VacancyManagementService implements VacancyManagementServiceInterface {
   async checkOut(data: CheckOutDTO): Promise<void> {
     const categoriesService = container.resolve(CategoriesService);
     const vacancyCheckIn = await this.vacancyManagementRepository.findVacancyById(data.id);
+    const dateEnd = dayjs(new Date()).format(formatDateAndHour);
+
+    const startTime = vacancyCheckIn.start_time;
+    console.log("startTime", dayjs(startTime).format(formatDateAndHour));
+
+    substractDate("29/06/2022 12:30:20", dateEnd);
 
     if (!vacancyCheckIn) {
       throw new ErrorCustom({
@@ -69,9 +76,6 @@ class VacancyManagementService implements VacancyManagementServiceInterface {
         name: "DependecyNotFound",
       });
     }
-
-    console.log(substractDate(new Date(), new Date()));
-    // console.log(substractDate(new Date("2022-06-23 14:20:44"), new Date()));
 
     // const category = await categoriesService.findCategoryById(vacancy.category_id);
 
@@ -105,7 +109,6 @@ class VacancyManagementService implements VacancyManagementServiceInterface {
 
   calculateTimeSpent(data: CalculationTimeSpentDTO): CalculatorTimeSpentInterface {
     const timeSpent = data.startTime;
-
     return {
       valueTotal: 1,
       valueAdditional: 1,

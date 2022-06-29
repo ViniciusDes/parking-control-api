@@ -16,12 +16,6 @@ app.use(express.json());
 
 app.use(routes);
 process.env.TZ = "America/Sao_Paulo";
-const nDate = new Date().toLocaleString("pt-BR", {
-  timeZone: "America/Sao_Paulo",
-});
-
-console.log(nDate);
-console.log(new Date());
 
 app.use(errorMidleware);
 app.listen(3334, () => console.log("server is running"));
