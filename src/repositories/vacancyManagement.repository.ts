@@ -1,6 +1,5 @@
 import { getRepository, Repository } from "typeorm";
 import { VacancyManagement } from "../entities/VacancyManagement";
-import { CheckInDTO, VacancyManagementDTO } from "../interfaces/vacancyManagementDTO.interface";
 import { IVacancyManagementRepository } from "./vacancyManagement.interface";
 
 class VacancyManagementRepository implements IVacancyManagementRepository {
@@ -8,34 +7,6 @@ class VacancyManagementRepository implements IVacancyManagementRepository {
 
   constructor() {
     this.repository = getRepository(VacancyManagement);
-  }
-
-  async update({
-    category_id,
-    start_time,
-    end_time,
-    value_hour,
-    value_hour_additional,
-    value_total,
-    board,
-    is_parked,
-    description,
-    vacancy_number,
-  }): Promise<void> {
-    const vacancy = this.repository.create({
-      category_id,
-      start_time,
-      end_time,
-      value_hour,
-      value_hour_additional,
-      value_total,
-      board,
-      is_parked,
-      description,
-      vacancy_number,
-    });
-
-    await this.repository.save(vacancy);
   }
 
   async checkIn({ category_id, start_time, board, description, vacancy_number, value_hour }): Promise<void> {
@@ -50,6 +21,15 @@ class VacancyManagementRepository implements IVacancyManagementRepository {
     });
 
     await this.repository.save(vacancy);
+  }
+
+  async checkOut(data: VacancyManagement): Promise<VacancyManagement> {
+    await this.repository.save({
+      ...data,
+      is_parked: 2,
+    });
+
+    return data;
   }
 
   async findVacancyByNumber(vacancy_number: number): Promise<VacancyManagement> {

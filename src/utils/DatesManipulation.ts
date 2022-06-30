@@ -1,16 +1,16 @@
 import dayjs from "dayjs";
 
-export function substractDate(date1: string, date2: string) {
-  let date;
+export const formatDateAndHour = "YYYY-MM-DD HH:mm:ss";
 
-  date1 = dayjs(date1).format(formatDateAndHour);
-  date2 = dayjs(date2).format(formatDateAndHour);
+export function substractTime(dateTime1: string, dateTime2: string): number {
+  const totalMinutes = dayjs(dateTime2).diff(dayjs(dateTime1), "minutes");
 
-  const hours = dayjs(date1).hour();
-  date = dayjs(date2).subtract(hours, "hour").format(formatDateAndHour);
-
-  console.log("substr", date);
-  return date;
+  return totalMinutes / 60;
 }
 
-export const formatDateAndHour = "DD/MM/YYYY HH:mm:ss";
+export function tranformMinutesForHours(fullMinutes: number) {
+  const fullHours = String(fullMinutes / 60);
+  const hours = parseInt(fullHours);
+  const minutes = (Number(fullHours) - hours) * 60;
+  return `${hours}:${minutes}`;
+}

@@ -1,8 +1,8 @@
 interface VacancyManagementDTO {
   id?: number;
   category_id: number;
-  start_time: number;
-  end_time?: number;
+  start_time: string;
+  end_time?: string;
   value_hour: number;
   value_hour_additional: number;
   value_total: number;

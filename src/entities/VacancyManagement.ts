@@ -6,12 +6,14 @@ class VacancyManagement {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
+  @Column()
   @ManyToOne(() => Category, (category) => category.id)
   @JoinColumn({
     name: "category_id",
     referencedColumnName: "id",
   })
   category_id: number;
+  category: Category;
 
   @Column()
   start_time: string;
