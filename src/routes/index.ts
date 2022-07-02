@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { categoriesRoutes } from "./categories.routes";
 import { companiesRoutes } from "./companies.routes";
+import { menusRoutes } from "./menus.routes";
 import { permissionsRoutes } from "./permissions.routes";
 import { usersRoutes } from "./users.routes";
 import { vacancyManagementRoutes } from "./vacancyManegement.routes";
@@ -16,5 +17,7 @@ routes.use("/companies", companiesRoutes);
 routes.use("/users", usersRoutes);
 
 routes.use("/permissions", permissionsRoutes);
+
+routes.use("/menus", menusRoutes);
 
 export { routes };

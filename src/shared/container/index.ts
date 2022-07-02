@@ -10,6 +10,8 @@ import { UsersRepository } from "../../repositories/users.respository";
 import { PermissionsRepositoryInterface } from "../../repositories/permissions.repository.interface";
 import { PermissionsRepository } from "../../repositories/permissions.repository";
 import { UsersCompaniesReporitory } from "../../repositories/usersCompanies.repository";
+import { MenusRepository } from "../../repositories/menus.repository";
+import { MenusRepositoryInterface } from "../../repositories/menus.repository.interface";
 
 container.registerSingleton<CategoriesRepositoryInterface>("CategoriesRepository", CategoriesRepository);
 
@@ -22,3 +24,5 @@ container.registerSingleton<UsersRepositoryInterface>("UsersRepository", UsersRe
 container.registerSingleton<UsersCompaniesReporitory>("UsersCompaniesReporitory", UsersCompaniesReporitory);
 
 container.registerSingleton<PermissionsRepositoryInterface>("PermissionsRepository", PermissionsRepository);
+
+container.registerSingleton<MenusRepositoryInterface>("MenusRepository", MenusRepository);
