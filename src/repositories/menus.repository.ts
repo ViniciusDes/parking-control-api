@@ -16,6 +16,22 @@ export class MenusRepository implements MenusRepositoryInterface {
     return listAllMenus;
   }
 
+  async getMenuByStructure(structure: string): Promise<Menu> {
+    const menu = await this.repository.findOne({
+      structure,
+    });
+
+    return menu;
+  }
+
+  async getMenuByPathPage(pathPage: string): Promise<Menu> {
+    const menu = await this.repository.findOne({
+      path_page: pathPage,
+    });
+
+    return menu;
+  }
+
   async save(menu: MenuDTO): Promise<void> {
     const menu_ = this.repository.create({ ...menu });
 

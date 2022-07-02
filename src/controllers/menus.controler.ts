@@ -10,19 +10,12 @@ class MenuController {
 
     const companyService = container.resolve(MenusService);
 
-    try {
-      await companyService.save(data);
+    await companyService.save(data);
 
-      return res.status(201).send({
-        success: true,
-        message: "Menu salvo com sucesso",
-      });
-    } catch (error) {
-      throw new ErrorCustom({
-        statusCode: 500,
-        message: error.message,
-      });
-    }
+    return res.status(201).send({
+      success: true,
+      message: "Menu salvo com sucesso",
+    });
   }
 }
 

@@ -5,7 +5,11 @@ interface ErrorMiddlewareInterface extends Error {
 }
 
 module.exports = (err: ErrorMiddlewareInterface, req: Request, res: Response, next: NextFunction) => {
-  if (["DependecyNotFound", "ServiceHasAlreadyStarted"].includes(err.name)) {
+  if (
+    ["DependecyNotFound", "ServiceHasAlreadyStarted", "DataRequestInvalid", "DataInformationReplicated"].includes(
+      err.name
+    )
+  ) {
     res.status(400).send({
       success: false,
       message: err.message,
