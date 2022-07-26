@@ -7,9 +7,6 @@ class Category {
   id: number;
 
   @Column()
-  description: string;
-
-  @Column()
   value_hour: number;
 
   @Column()
