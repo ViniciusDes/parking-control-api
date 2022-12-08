@@ -32,9 +32,10 @@ class VacancyManagementRepository implements IVacancyManagementRepository {
     return data;
   }
 
-  async findVacancyByNumber(vacancy_number: number): Promise<VacancyManagement> {
+  async findVacancyByNumberIsParked(vacancy_number: number): Promise<VacancyManagement> {
     const vacancy = await this.repository.findOne({
       vacancy_number,
+      is_parked: 1,
     });
 
     return vacancy;

@@ -16,8 +16,7 @@ class VacancyManagementService implements VacancyManagementServiceInterface {
   ) {}
 
   async verifyIfHaveAlreadyCheckIn(vacancy_number: number): Promise<boolean> {
-    const vacancyChecked = await this.vacancyManagementRepository.findVacancyByNumber(vacancy_number);
-
+    const vacancyChecked = await this.vacancyManagementRepository.findVacancyByNumberIsParked(vacancy_number);
     return vacancyChecked ? (vacancyChecked.is_parked === 1 ? true : false) : false;
   }
 
