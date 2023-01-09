@@ -15,6 +15,12 @@ class CompaniesRepository implements CompaniesRepositoryInterface {
 
     await this.repository.save(company);
   }
+
+  async getCompanies() {
+    const compannies = await this.repository.find();
+
+    return compannies;
+  }
 }
 
 export { CompaniesRepository };

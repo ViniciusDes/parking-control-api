@@ -10,6 +10,9 @@ class Category {
   value_hour: number;
 
   @Column()
+  description: string;
+
+  @Column()
   value_additional: number;
 
   @ManyToOne(() => Company, (company) => company.id)

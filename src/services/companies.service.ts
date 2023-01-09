@@ -63,6 +63,10 @@ class CompaniesService implements CompaniesServiceInterface {
       });
     }
   }
+
+  async getCompanies() {
+    return this.companiesRepository.getCompanies();
+  }
 }
 
 export { CompaniesService };
