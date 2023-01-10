@@ -20,7 +20,27 @@ class CategoryController {
 
       return res.status(201).send({
         success: true,
-        message: "categoria criado com sucesso",
+        message: "Categoria criado com sucesso",
+      });
+    } catch (error) {
+      throw new ErrorCustom({
+        statusCode: 500,
+        message: error.message,
+      });
+    }
+  }
+
+  async getCategories(req: Request, res: Response): Promise<Response> {
+    const description = req.query.description ?? "";
+    const categoriesService = container.resolve(CategoriesService);
+
+    try {
+      const categories = await categoriesService.getCategories(String(description));
+
+      return res.status(201).send({
+        success: true,
+        message: "",
+        data: categories,
       });
     } catch (error) {
       throw new ErrorCustom({

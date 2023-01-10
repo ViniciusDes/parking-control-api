@@ -26,6 +26,22 @@ class CategoriesRepository implements CategoriesRepositoryInterface {
 
     return category;
   }
+
+  async getCategories(description?: string): Promise<Array<Category>> {
+    let categories = [];
+
+    if (description) {
+      categories = await this.repository.find({
+        where: {
+          description: description,
+        },
+      });
+    } else {
+      categories = await this.repository.find();
+    }
+
+    return categories;
+  }
 }
 
 export { CategoriesRepository };

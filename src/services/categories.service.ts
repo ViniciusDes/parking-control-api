@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { Category } from "../entities/Category";
 import { CategoryDTO } from "../interfaces/categoryDTO.interface";
 import { CategoriesRepositoryInterface } from "../repositories/categories.repository.interface";
 import { ICategoriesService } from "./categories.service.interface";
@@ -26,6 +27,10 @@ class CategoriesService implements ICategoriesService {
 
   async create(data: CategoryDTO): Promise<void> {
     await this.categoriesRepository.save(data);
+  }
+
+  async getCategories(description?: string): Promise<Array<Category>> {
+    return this.categoriesRepository.getCategories(description);
   }
 }
 

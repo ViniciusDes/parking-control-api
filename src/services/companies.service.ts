@@ -32,6 +32,19 @@ class CompaniesService implements CompaniesServiceInterface {
     }
   }
 
+  private async companyAlreadyExists(data: CompanyDTO) {
+    let companyExists = false;
+    try {
+      const company = await this.companiesRepository.getCompanies(data.cpf_cpnj);
+      console.log("company", company);
+      if (company.length) {
+        companyExists = true;
+      }
+    } catch (error) {}
+
+    return companyExists;
+  }
+
   private schemaValidate = Yup.object().shape({
     id: Yup.number(),
     cod_company: Yup.string().required("Campo obrigatório").max(4, "Máximo 4 caracteres, verifique"),
@@ -55,6 +68,13 @@ class CompaniesService implements CompaniesServiceInterface {
           message: JSON.stringify(this.errors),
         });
       }
+      if (await this.companyAlreadyExists(data)) {
+        throw new ErrorCustom({
+          statusCode: 501,
+          message: "Empresa já cadastrada",
+        });
+      }
+
       await this.companiesRepository.save(data);
     } catch (e) {
       throw new ErrorCustom({
