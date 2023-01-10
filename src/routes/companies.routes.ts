@@ -6,5 +6,6 @@ const companiesRoutes = Router();
 const categoriesController = new CompaniesController();
 
 companiesRoutes.post("/", categoriesController.createCompany);
+companiesRoutes.get("/", categoriesController.getCompanies);
 
 export { companiesRoutes };

@@ -15,6 +15,21 @@ class CompaniesRepository implements CompaniesRepositoryInterface {
 
     await this.repository.save(company);
   }
+
+  async getCompanies(cpfCnpj?: string) {
+    let companies = [];
+    if (cpfCnpj) {
+      companies = await this.repository.find({
+        where: {
+          cpf_cpnj: cpfCnpj,
+        },
+      });
+    } else {
+      companies = await this.repository.find();
+    }
+
+    return companies;
+  }
 }
 
 export { CompaniesRepository };

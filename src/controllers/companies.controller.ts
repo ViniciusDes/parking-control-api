@@ -24,6 +24,24 @@ class CompaniesController {
       });
     }
   }
+
+  async getCompanies(req: Request, res: Response): Promise<Response> {
+    const companyService = container.resolve(CompaniesService);
+    try {
+      const companies = await companyService.getCompanies();
+
+      return res.status(201).send({
+        success: true,
+        message: "Sucesso ao pesquisar empresas",
+        data: companies,
+      });
+    } catch (error) {
+      throw new ErrorCustom({
+        statusCode: 500,
+        message: error.message,
+      });
+    }
+  }
 }
 
 export { CompaniesController };
