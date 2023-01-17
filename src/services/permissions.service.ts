@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import * as Yup from "yup";
-import { PermissionsDTO } from "../interfaces/permissionsDTO.interface";
+import { GetPermissionsDTO, PermissionsDTO } from "../interfaces/permissionsDTO.interface";
 import { ErrorCustom } from "../middlewares/ErrorCustom";
 import { PermissionsRepository } from "../repositories/permissions.repository";
 import { PermissionsServicesInterface } from "./permissions.service.interface";
@@ -56,5 +56,9 @@ export class PermissionsService implements PermissionsServicesInterface {
         message: e.message,
       });
     }
+  }
+
+  async getAll(description?: string): Promise<GetPermissionsDTO> {
+    return this.permissionsRepository.getAll(description);
   }
 }

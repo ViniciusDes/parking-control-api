@@ -51,6 +51,12 @@ class UsersService implements UserServicesInterface {
     }
   }
 
+  async getAll(name?: string): Promise<Array<User>> {
+    const users = await this.userRepository.getAll(name);
+
+    return users;
+  }
+
   async bindUserWithCompany(data: BindUserWithCompanyDTO) {
     try {
       await this.usersCompanies.bindUserWithCompany(data);

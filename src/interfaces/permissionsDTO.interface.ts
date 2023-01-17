@@ -5,4 +5,6 @@ interface PermissionsDTO {
   situation: string;
 }
 
-export { PermissionsDTO };
+type GetPermissionsDTO = Array<PermissionsDTO>;
+
+export { PermissionsDTO, GetPermissionsDTO };

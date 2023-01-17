@@ -24,6 +24,27 @@ class PermissionsController {
       });
     }
   }
+
+  async getPermissions(req: Request, res: Response): Promise<Response> {
+    const description = req.query.description ?? "";
+
+    try {
+      const permissionsService = container.resolve(PermissionsService);
+
+      const permissions = await permissionsService.getAll(String(description));
+
+      return res.status(201).send({
+        success: true,
+        message: "",
+        data: permissions,
+      });
+    } catch (error) {
+      throw new ErrorCustom({
+        statusCode: 500,
+        message: error.message,
+      });
+    }
+  }
 }
 
 export { PermissionsController };

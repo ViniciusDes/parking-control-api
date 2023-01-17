@@ -14,7 +14,10 @@ class Permissions {
 
   @Column()
   @ManyToOne(() => Company, (company) => company.id)
-  @JoinColumn()
+  @JoinColumn({
+    name: "id_company",
+    referencedColumnName: "id",
+  })
   id_company: number;
   company: Company;
 }

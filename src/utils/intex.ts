@@ -9,3 +9,7 @@ export function messageValidateTypeString(): string {
 export function messageValidateTypeNumber(): string {
   return "O campo deve ser do tipo number, verifique";
 }
+
+export function upperCase(text: string): string {
+  return String(text).toUpperCase();
+}
