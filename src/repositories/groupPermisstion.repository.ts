@@ -20,32 +20,21 @@ export class GroupPermissionRepository implements GroupPermissionRepositoryInter
 
   async getAll(idGroup?: number): Promise<Array<GroupPermissionDTO>> {
     let listGroupsPermissions = [];
-    if (idGroup) {
-      listGroupsPermissions = await this.repository
-        .createQueryBuilder("groups_permissions")
-        .select([
-          "groups_permissions.id_group, groups_permissions.id_permission",
-          "gp.description as group_description",
-          "prm.description as permission_description",
-        ])
-        .innerJoin(Groups, "gp", "gp.id = :idGroup", { idGroup: idGroup })
-        .innerJoin(Permissions, "prm", "prm.id = groups_permissions.id_permission")
-        .where("groups_permissions.id_group = :idGroup", { idGroup })
-        .getRawMany();
-    } else {
-      listGroupsPermissions = await this.repository
-        .createQueryBuilder("groups_permissions")
-        .select([
-          "groups_permissions.id_group, groups_permissions.id_permission",
-          "gp.description as group_description",
-          "prm.description as permission_description",
-        ])
-        .innerJoin(Groups, "gp", "gp.id = groups_permissions.id_group")
-        .innerJoin(Permissions, "prm", "prm.id = groups_permissions.id_permission")
-        .getRawMany();
+    let query = this.repository
+      .createQueryBuilder("groups_permissions")
+      .select([
+        "groups_permissions.id_group, groups_permissions.id_permission",
+        "gp.description as group_description",
+        "prm.description as permission_description",
+      ])
+      .innerJoin(Groups, "gp", "gp.id = groups_permissions.id_group")
+      .innerJoin(Permissions, "prm", "prm.id = groups_permissions.id_permission");
 
-      console.log("listGroupsPermissions", listGroupsPermissions);
+    if (idGroup) {
+      query = query.where("groups_permissions.id_group = :idGroup", { idGroup });
     }
+
+    listGroupsPermissions = await query.getRawMany();
 
     return listGroupsPermissions;
   }
