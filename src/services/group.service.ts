@@ -4,12 +4,17 @@ import { GroupRepositoryInterface } from "../repositories/group.repository.inter
 import { GroupServiceInterface } from "./group.service.interface";
 import * as Yup from "yup";
 import { ErrorCustom } from "../middlewares/ErrorCustom";
+import { Groups } from "../entities/Groups";
+import { GroupPermissionDTO } from "../interfaces/groupPermissioDTO.interface";
+import { GroupPermissionRepositoryInterface } from "../repositories/groupPermisstion.repository.interface";
 
 @injectable()
 class GroupService implements GroupServiceInterface {
   constructor(
     @inject("GroupRepository")
-    private groupsRepository: GroupRepositoryInterface
+    private groupsRepository: GroupRepositoryInterface,
+    @inject("GroupPermissionsRepository")
+    private groupPermissionsRepository: GroupPermissionRepositoryInterface
   ) {}
   private errors = {};
 
@@ -55,6 +60,21 @@ class GroupService implements GroupServiceInterface {
         message: e.message,
       });
     }
+  }
+
+  async getGroups(description: string): Promise<Array<Groups>> {
+    const groups = await this.groupsRepository.getAll(description);
+
+    return groups;
+  }
+
+  async saveGroupPermissions(data: GroupPermissionDTO) {
+    this.groupPermissionsRepository.save(data);
+  }
+
+  async getGroupPermissions(idGroup?: number): Promise<Array<GroupPermissionDTO>> {
+    const groups = await this.groupPermissionsRepository.getAll(idGroup);
+    return groups;
   }
 }
 

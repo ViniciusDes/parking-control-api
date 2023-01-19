@@ -17,7 +17,7 @@ class UsersService implements UserServicesInterface {
     @inject("UsersRepository")
     private userRepository: UsersRepositoryInterface,
     @inject("UsersCompaniesReporitory")
-    private usersCompanies: UsersCompaniesRepositoryInterface
+    private usersCompaniesRepository: UsersCompaniesRepositoryInterface
   ) {}
 
   private errors = {};
@@ -59,7 +59,7 @@ class UsersService implements UserServicesInterface {
 
   async bindUserWithCompany(data: BindUserWithCompanyDTO) {
     try {
-      await this.usersCompanies.bindUserWithCompany(data);
+      await this.usersCompaniesRepository.bindUserWithCompany(data);
     } catch (e) {
       throw new ErrorCustom({
         statusCode: 500,

@@ -3,8 +3,12 @@ import { GroupController } from "../controllers/group.controller";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 const groupRoutes = Router();
 
-const categoriesController = new GroupController();
+const groupController = new GroupController();
 
-groupRoutes.post("/", ensureAuthenticated, categoriesController.saveGroup);
+groupRoutes.post("/", ensureAuthenticated, groupController.saveGroup);
+groupRoutes.get("/", ensureAuthenticated, groupController.getAllGroups);
+
+groupRoutes.post("/bindPermissions", ensureAuthenticated, groupController.bindGroupWithPermission);
+groupRoutes.get("/linkedPermissions", ensureAuthenticated, groupController.getGroupPermissionsLinked);
 
 export { groupRoutes };

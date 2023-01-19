@@ -1,4 +1,4 @@
-import { Entity, ManyToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryColumn } from "typeorm";
 import { Groups } from "./Groups";
 import { Permissions } from "./Permission";
 
@@ -11,6 +11,10 @@ class GroupsPermissions {
   @PrimaryColumn()
   @ManyToMany(() => Groups, (group) => group.id)
   id_group: number;
+
+  // @Column()
+  // @ManyToMany(() => Groups, (group) => group.description)
+  // description_group: number;
 }
 
 export { GroupsPermissions };
