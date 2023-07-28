@@ -16,17 +16,28 @@ class CompaniesRepository implements CompaniesRepositoryInterface {
     await this.repository.save(company);
   }
 
-  async getCompanies(cpfCnpj?: string) {
-    let companies = [];
-    if (cpfCnpj) {
-      companies = await this.repository.find({
-        where: {
-          cpf_cpnj: cpfCnpj,
-        },
-      });
-    } else {
-      companies = await this.repository.find();
-    }
+  async getCompanies(filter?: string) {
+    let query = this.repository.createQueryBuilder("companies");
+
+    const fieldsToFilter = ["cod_company", "cpf_cpnj", "corporate_name", "fantasy_name", "address_city"];
+    console.log(filter.toUpperCase());
+    if (filter)
+      for (const field of fieldsToFilter) {
+        query = query.orWhere(`companies.${field} LIKE :${field}`, { [field]: `%${filter.toUpperCase()}%` });
+      }
+
+    const companies = await query.getMany();
+
+    // let  [];
+    // if (cpfCnpj) {
+    //   companies = await this.repository.find({
+    //     where: {
+    //       cpf_cpnj: cpfCnpj,
+    //     },
+    //   });
+    // } else {
+    //   companies = await this.repository.find();
+    // }
 
     return companies;
   }

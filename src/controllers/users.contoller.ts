@@ -48,6 +48,29 @@ class UsersController {
     }
   }
 
+  async getUserById(req: Request, res: Response): Promise<Response> {
+    const id = req.params.id;
+
+    console.log("id", id);
+
+    const usersService = container.resolve(UsersService);
+
+    try {
+      const users = await usersService.getUserById(Number(id));
+
+      return res.status(201).send({
+        success: true,
+        message: "",
+        data: users,
+      });
+    } catch (error) {
+      throw new ErrorCustom({
+        statusCode: 500,
+        message: error.message,
+      });
+    }
+  }
+
   async bindUserWithCompany(req: Request, res: Response): Promise<Response> {
     const data: BindUserWithCompanyDTO = req.body;
 
@@ -79,7 +102,7 @@ class UsersController {
       return res.status(201).send({
         success: true,
         message: null,
-        data: [tokenUser],
+        data: tokenUser,
       });
     } catch (error) {
       throw new ErrorCustom({

@@ -7,6 +7,8 @@ const userController = new UsersController();
 
 usersRoutes.get("/", ensureAuthenticated, userController.getUsers);
 
+usersRoutes.get("/:id", ensureAuthenticated, userController.getUserById);
+
 usersRoutes.post("/", userController.createUser);
 
 usersRoutes.post("/bindCompany", ensureAuthenticated, userController.bindUserWithCompany);

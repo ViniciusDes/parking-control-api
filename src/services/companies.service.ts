@@ -68,7 +68,7 @@ class CompaniesService implements CompaniesServiceInterface {
           message: JSON.stringify(this.errors),
         });
       }
-      if (await this.companyAlreadyExists(data)) {
+      if (!data.id && (await this.companyAlreadyExists(data))) {
         throw new ErrorCustom({
           statusCode: 501,
           message: "Empresa já cadastrada",
@@ -84,8 +84,8 @@ class CompaniesService implements CompaniesServiceInterface {
     }
   }
 
-  async getCompanies() {
-    return this.companiesRepository.getCompanies();
+  async getCompanies(filter?: string) {
+    return this.companiesRepository.getCompanies(filter);
   }
 }
 

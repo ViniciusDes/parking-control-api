@@ -26,11 +26,13 @@ services:
       - backend-network
     container_name: app_parking_control
     ports:
-      - 3335:3336
+      - 3335:3334
     volumes:
       - .:/usr/app
+      - node_modules:/usr/app/node_modules
     # network_mode: host
 
 volumes:
+  node_modules:
   pgdata:
     driver: local

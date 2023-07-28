@@ -39,8 +39,10 @@ class UsersService implements UserServicesInterface {
         });
       }
 
-      const passwordHash = await hash(data.password, 8);
-      data.password = passwordHash;
+      if (data.password) {
+        const passwordHash = await hash(data.password, 8);
+        data.password = passwordHash;
+      }
 
       await this.userRepository.save(data);
     } catch (e) {
@@ -53,6 +55,13 @@ class UsersService implements UserServicesInterface {
 
   async getAll(name?: string): Promise<Array<User>> {
     const users = await this.userRepository.getAll(name);
+
+    return users;
+  }
+
+  async getUserById(id: number): Promise<User> {
+    const users = await this.userRepository.findUserById(id);
+    console.log("users", users);
 
     return users;
   }
@@ -70,6 +79,7 @@ class UsersService implements UserServicesInterface {
 
   async authenticate({ email, password }: AuthenticateRequestDTO): Promise<AuthenticateReponse> {
     const user = await this.userRepository.findUserByEmail(email);
+    console.log("userr", user);
 
     if (!user) {
       throw new ErrorCustom({ statusCode: 400, message: "Usuário ou senha inválidos" });
@@ -96,7 +106,7 @@ class UsersService implements UserServicesInterface {
 
   private async validateData(data: UserDTO): Promise<boolean> {
     const userAlredyExists = await this.verifyUserHasAlreadyExists(data);
-    if (userAlredyExists) {
+    if (!data.id && userAlredyExists) {
       throw new ErrorCustom({
         statusCode: 501,
         message: "Usuário já cadastrado, verifique",

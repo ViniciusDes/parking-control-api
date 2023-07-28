@@ -6,11 +6,14 @@ import { routes } from "./routes";
 const errorMidleware = require("./middlewares/errors");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const cors = require("cors");
 
 const app = express();
 
 app.use(bodyParser());
 app.use(methodOverride());
+
+app.use(cors());
 
 app.use(express.json());
 

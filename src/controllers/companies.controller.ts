@@ -27,8 +27,10 @@ class CompaniesController {
 
   async getCompanies(req: Request, res: Response): Promise<Response> {
     const companyService = container.resolve(CompaniesService);
+    const { filter } = req.query;
+
     try {
-      const companies = await companyService.getCompanies();
+      const companies = await companyService.getCompanies(String(filter) ?? "");
 
       return res.status(201).send({
         success: true,
